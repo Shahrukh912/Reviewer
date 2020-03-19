@@ -7,7 +7,9 @@
         if($result!=true){
             echo "Error in Inserting review";
         }
-    unset($_POST['review_submit']);
+        $self_url = $_SERVER["PHP_SELF"];
+        header("location:$self_url");//to stop repost in database on browser refresh button
+        exit(); 
     }
 
 ?>
