@@ -1,0 +1,75 @@
+		.HeaderMain{ /*----Entire header-------*/
+			width: 104%;
+			height: 80px;
+			background-color: #191919;
+			overflow: hidden;
+		}
+		.HeaderMain .webname{/*---left side name of the web div in header------*/
+			float: left;
+			width: 20%;
+			height: 100%;
+		}
+			.HeaderMain .webname p{/* the textstyle in which the name is written*/
+				font-size: 50px;
+				margin-top: 0px;
+				padding: 10px 15px;
+				font-family: "Stencil";
+				color: rgba(100,00,130,0.8);
+			}
+		.HeaderMain .search{/*---middle search bar div in header------*/
+			float: left;
+			width: 50%;
+			height: 100%;
+		}
+			.HeaderMain .search input[type="search"]{/*---css for the serach bar------*/
+				border:0;
+				background: none;
+				display: inline-block;
+				margin: 20px auto;
+				text-align: center;
+				border: 2px solid #3498db;
+				padding: 14px 10px;
+				width: 70%;
+				outline: none;
+				color: white;
+				border-radius: 24px;
+				transition: 0.25s;			
+			}
+			.HeaderMain .search input[type="search"]:focus{/*---css for the serach bar when it is hover------*/
+				 background-color: #000000;
+			}
+			.HeaderMain .search input[type="submit"]{/*---css for the serach bar submit button------*/
+				border:0;
+				background: none;
+				display: inline-block;
+				width: 20%;
+				margin: 20px auto;
+				text-align: center;
+				border: 2px solid #2ecc71;
+				padding: 14px 40px;
+				outline: none;
+				color: white;
+				border-radius: 24px;
+				transition: 0.25s;
+				cursor: pointer;
+			}
+			.HeaderMain .search input[type="submit"]:hover{/* when submit button is hovered */
+				  background: #2ecc71;
+			}
+
+		.HeaderMain .navbuttons{ /*--- the right side of header for buttons---*/
+			float: left;
+			width: 25%;
+			height: 100%;
+		}
+
+			.HeaderMain .navbuttons button{ /*-- the right side buttons---*/
+				padding: 10px 25px;
+				margin: 15px 7px;
+				height: 50px;
+				border-radius: 10px;
+				border-style: none;
+				outline: none;
+			}
+			
+
