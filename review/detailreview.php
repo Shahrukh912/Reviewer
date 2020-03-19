@@ -1,5 +1,14 @@
 <?php
     include "../testdb.php";
+    if(isset($_POST['review_submit'])){
+        $text = $_POST['Opinion'];
+        $database = new Database_api("reviewer");
+        $result = $database->write_review(1,$text,"Shahrukh",4);
+        if($result!=true){
+            echo "Error in Inserting review";
+        }
+    unset($_POST['review_submit']);
+    }
 
 ?>
 
@@ -68,8 +77,14 @@ else{
 }
 ?>
 <!-- ---------------------------------------------------------------- -->
-    </div>
-</div>
+      <div class="card">
+            <form action="<?php $_PHP_SELF ?>" method="POST">
+                <textarea name="Opinion" cols="100" rows="5" placeholder="Write Your Opinion"></textarea><br>
+                <input type="submit" name="review_submit" value="Submit">
+            </form>
+      </div>
+    </div><!--Right column div end--->    
+</div><!--Row div end--->
 
 <div class="footer">
   <h2>Footer</h2>

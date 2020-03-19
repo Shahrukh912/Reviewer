@@ -38,7 +38,7 @@ class Database_api{
 
 		public function fetch_review($website_id){
 			$this->connect();
-			$query = "SELECT * from review WHERE id=$website_id";
+			$query = "SELECT * from review WHERE id=$website_id LIMIT 10";
 			$result = mysqli_query($this->conn,$query);
 			$this->disconnect();
 			if((mysqli_num_rows($result))<=0){
@@ -47,8 +47,15 @@ class Database_api{
 			else{
 				return $result;
 			}
+		}
 
-		}	
+		public function write_review($website_id,$review,$name,$user_id){
+			$this->connect();
+			$query ="INSERT INTO review (id,desciption,name,uid) VALUES ($website_id,'$review','$name',$user_id)";
+			$result = mysqli_query($this->conn,$query) or die("fffff: ".mysqli_error($this->conn));
+			$this->disconnect();
+			return $result;
+		}
 
 	}
 ?>
