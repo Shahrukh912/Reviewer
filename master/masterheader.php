@@ -3,9 +3,9 @@
 		<p>Reviewer</p>
 	</div>
 	<div class="search">
-		<form>
-			<input type="search" name="search" placeholder="Search for Website or Profile">
-			<input type="submit" name="searchsubmit" value="Search" >
+		<form action="../review/search.php">
+			<input type="search" name="search" placeholder="Search for Website">
+			<input type="submit" name="search_submit" value="Search" >
 		</form>
 	</div>
 	<div class="navbuttons">

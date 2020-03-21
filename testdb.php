@@ -56,7 +56,7 @@ class Database_api{
 			$this->disconnect();
 			return $result;
 		}
-// ------------------WEBSITE DETAIL-------------------
+// ---------------------WEBSITE DETAIL-------------------
 		public function fetch_website($website_id){
 			$this->connect();
 			$query = "SELECT * from website WHERE id=$website_id ";
