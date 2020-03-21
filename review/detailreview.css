@@ -90,6 +90,17 @@ body {
   width: 40%;
   height: inherit;
 }
+.a_button{ /* the buttons that appears on the left side like addNewWebsite etc */
+    text-decoration: none;
+    display: inline-block;
+    width: -webkit-fill-available;
+    height: 40px;
+    line-height: 40px;
+    padding: 0px 10px;
+    background-color: #aaaaaa;
+    border-radius: 5px;
+    color: black;
+}
 
 /* Right column */
 .MainViewrightcolumn {

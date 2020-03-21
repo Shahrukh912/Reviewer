@@ -1,8 +1,9 @@
 .mini_website_detail{
-	border:2px solid red;
+	border:2px solid #3498db;
 	float: left;
 	text-align: center;
 	padding: 30px;
+	border-radius: 10px;
 }
 
 .mini_website_detail #mini_logo{
@@ -22,6 +23,8 @@
 	background-color: transparent;
 	margin:0px 20px 20px 0px;
 	padding: 0px;
+	cursor: pointer;
+	border-radius: 10px;
 }
 .MainView form{ 
 	float: left;

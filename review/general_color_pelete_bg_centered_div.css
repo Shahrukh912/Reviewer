@@ -1,0 +1,14 @@
+body{
+	background-image: url(../img/color_pelete_bg.png);
+}
+.centered_aligned_div{
+	clear: both;
+	background-color: #ffffff94;
+	padding: 40px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border-radius: 25px;
+	transform: translate(-50%,-50%);
+	text-align: center;
+}

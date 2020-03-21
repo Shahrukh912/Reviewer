@@ -35,25 +35,23 @@
     
     <div class="rightcolumn">
 <!---------------DIV that displays details of the website -->
-<?php 
-$database = new Database_api("reviewer");
-$result = $database->fetch_website(3);
-$row=mysqli_fetch_assoc($result);
-      echo "<div class='MainView'>";
-            for ($i=0; $i < 10; $i++) { 
-            echo "<form action='detailreview.php' method='POST'>";
-            echo "<button type='submit' name='website_id' value='3'>";
-	            echo "<div class='mini_website_detail'>";
-					echo "<img src='../img/1_youtube.png' id='mini_logo' height='50' width='50'>";
-					echo "<h2>Youtube</h2>";
-					echo "<img src='../img/like.png'>3000 ";
-					echo "<img src='../img/dislike.jpg'>3000";
-				echo "</div>";
-			echo "</button></form>";
-            }
-      
-      echo "</div>";
-?>
+        <div class="MainView">
+            <form action="upload_website.php" method="Post" enctype="multipart/form-data">
+                <h1>Enter Details of the Website</h1>
+                <table>
+                    <tr>
+                        <td>Name </td><td><input type="text" name="txt_webname" required="required"></td>
+                    </tr>
+                    <tr>
+                        <td>Select Logo </td><td><input type="file" name="file_weblogo" required="required"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="webdetail_submit" value="Submit"> </td>
+                        <td><input type="reset" name="reset" value="Reset"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
 
     </div><!--Right column div end--->    
 </div><!--Row div end--->
