@@ -45,22 +45,25 @@
     </div>
     
     <div class="rightcolumn">
-
-      <div class="MainView">
-            <div class="MainViewleftcolumn">
-                <img src="../img/test.jpg"/>
-            </div>
-            <div class="MainViewrightcolumn">
-                <h1>Website</h1>
-                <h3>Average rating : 5.5</h3>
-                <h3>Number of review : 5m</h3>
-                <h3>Likes : 7b</h3>
-                <h3>Dislikes : 1000</h3>
-            </div>
-      </div>
+<!---------------DIV that displays details of the website -->
+<?php 
+$database = new Database_api("reviewer");
+$result = $database->fetch_website(3);
+$row=mysqli_fetch_assoc($result);
+      echo "<div class='MainView'>";
+            echo "<div class='MainViewleftcolumn'>";
+                echo "<img src='../img/".$row['imgurl']."'/>";
+            echo "</div>";
+            echo "<div class='MainViewrightcolumn'>";
+                echo "<table><th><h1>".$row['name']."</h1></th>";
+                echo "<tr><td><h3> Average rating </h3></td><td><h3>".$row['rating']."</h3></td><tr>";
+                echo "<tr><td><h3> Likes </h3></td><td><h3>".$row['likes']."</h3></td><tr>";
+                echo "<tr><td><h3> Dislikes </h3></td><td><h3>".$row['dislikes']."</h3></td><tr></table>";
+            echo "</div>";
+      echo "</div>";
+?>
 <!-- ---------REVIEW BOX----------- -->
 <?php  
-$database = new Database_api("reviewer");
 $result = $database->fetch_review(1);
 if($result !=NULL){
     while ($row=mysqli_fetch_assoc($result)) {

@@ -35,7 +35,7 @@ class Database_api{
 			$this->disconnect();
 			return $row;
 		}
-
+// -----------------REVIEW---------------
 		public function fetch_review($website_id){
 			$this->connect();
 			$query = "SELECT * from review WHERE id=$website_id LIMIT 10";
@@ -55,6 +55,19 @@ class Database_api{
 			$result = mysqli_query($this->conn,$query) or die("fffff: ".mysqli_error($this->conn));
 			$this->disconnect();
 			return $result;
+		}
+// ------------------WEBSITE DETAIL-------------------
+		public function fetch_website($website_id){
+			$this->connect();
+			$query = "SELECT * from website WHERE id=$website_id";
+			$result = mysqli_query($this->conn,$query);
+			$this->disconnect();
+			if((mysqli_num_rows($result))<=0){
+				return NULL;
+			}
+			else{
+				return $result;
+			}
 		}
 
 	}
