@@ -59,7 +59,7 @@ class Database_api{
 // ------------------WEBSITE DETAIL-------------------
 		public function fetch_website($website_id){
 			$this->connect();
-			$query = "SELECT * from website WHERE id=$website_id";
+			$query = "SELECT * from website WHERE id=$website_id ";
 			$result = mysqli_query($this->conn,$query);
 			$this->disconnect();
 			if((mysqli_num_rows($result))<=0){
