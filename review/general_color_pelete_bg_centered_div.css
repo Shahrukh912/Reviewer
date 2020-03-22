@@ -1,8 +1,8 @@
 body{
 	background-image: url(../img/color_pelete_bg.png);
+	background-attachment: fixed;
 }
 .centered_aligned_div{
-	clear: both;
 	background-color: #ffffff94;
 	padding: 40px;
 	position: absolute;
