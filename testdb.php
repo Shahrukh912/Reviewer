@@ -36,10 +36,10 @@ class Database_api{
 			return $row;
 		}
 // -----------------REVIEW---------------
-		public function fetch_review($website_id){
+		public function read_review($website_id){
 			$this->connect();
 			$query = "SELECT * from review WHERE id=$website_id LIMIT 10";
-			$result = mysqli_query($this->conn,$query);
+			$result = mysqli_query($this->conn,$query) or die("Database_class error in function read_review : ".mysqli_error($this->conn));;
 			$this->disconnect();
 			if((mysqli_num_rows($result))<=0){
 				return NULL;
@@ -52,15 +52,15 @@ class Database_api{
 		public function write_review($website_id,$review,$name,$user_id){
 			$this->connect();
 			$query ="INSERT INTO review (id,desciption,name,uid) VALUES ($website_id,'$review','$name',$user_id)";
-			$result = mysqli_query($this->conn,$query) or die("fffff: ".mysqli_error($this->conn));
+			$result = mysqli_query($this->conn,$query) or die("Database_class error in function write_review : ".mysqli_error($this->conn));
 			$this->disconnect();
 			return $result;
 		}
 // ---------------------WEBSITE DETAIL-------------------
-		public function fetch_website($website_id){
+		public function read_website($website_id){
 			$this->connect();
 			$query = "SELECT * from website WHERE id=$website_id ";
-			$result = mysqli_query($this->conn,$query);
+			$result = mysqli_query($this->conn,$query) or die("Database_class error in function read_website : ".mysqli_error($this->conn));
 			$this->disconnect();
 			if((mysqli_num_rows($result))<=0){
 				return NULL;
@@ -68,6 +68,20 @@ class Database_api{
 			else{
 				return $result;
 			}
+		}
+		public function write_website($websitename,$imgname){
+			$this->connect();
+			$query ="INSERT INTO website(name, likes, dislikes, rating, imgurl) VALUES ('".$websitename."',0,0,0,'".$imgname."')";
+			$result = mysqli_query($this->conn,$query) or die("Database_class error in function write_website: ".mysqli_error($this->conn));
+			$this->disconnect();
+			return $result;
+		}
+		public function check_exitance_of_websitename($websitename){
+			$this->connect();
+			$query = "SELECT name from website WHERE name='$websitename'";
+			$row = mysqli_num_rows(mysqli_query($this->conn,$query));
+			$this->disconnect();
+			return $row;
 		}
 
 	}

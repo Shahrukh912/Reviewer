@@ -1,15 +1,19 @@
 <?php
+session_start();
     include "../testdb.php";
     if(isset($_POST['review_submit'])){
         $text = $_POST['Opinion'];
         $database = new Database_api("reviewer");
-        $result = $database->write_review(1,$text,"Shahrukh",4);
+        $result = $database->write_review($_SESSION['website_id'],$text,"Shahrukh",4);
         if($result!=true){
             echo "Error in Inserting review";
         }
         $self_url = $_SERVER["PHP_SELF"];
         header("location:$self_url");//to stop repost in database on browser refresh button
         exit(); 
+    }
+    else if(!isset($_SESSION['website_id'])){
+        $_SESSION['website_id'] = $_POST['website_id'];
     }
 
 ?>
@@ -48,7 +52,7 @@
 <!---------------DIV that displays details of the website -->
 <?php 
 $database = new Database_api("reviewer");
-$result = $database->fetch_website(3);
+$result = $database->read_website($_SESSION['website_id']);
 $row=mysqli_fetch_assoc($result);
       echo "<div class='MainView'>";
             echo "<div class='MainViewleftcolumn'>";
@@ -64,14 +68,14 @@ $row=mysqli_fetch_assoc($result);
 ?>
 <!-- ---------REVIEW BOX----------- -->
 <?php  
-$result = $database->fetch_review(1);
+$result = $database->read_review($_SESSION['website_id']);
 if($result !=NULL){
     while ($row=mysqli_fetch_assoc($result)) {
         # code...
       echo "<div class='card'>";
         echo "<h2>".$row["name"]."</h2>";
         echo "<h5>Title description, Sep 2, 2017</h5>";
-        echo "<p>".$row["desciption"]."</p>";
+        echo "<p>".htmlentities(nl2br($row["desciption"]))."</p>";
       echo "</div>";
     }
 }

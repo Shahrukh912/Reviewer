@@ -1,27 +1,8 @@
 <?php
-// $file_upload_status = false;
-// $website_detail_upload_status = false;
-$errors= array();
-//    if(isset($_FILES['file_weblogo'])){
-//       $errors= array();
-//       $file_name = $_FILES['file_weblogo']['name'];
-//       $file_size =$_FILES['file_weblogo']['size'];
-//       $file_tmp =$_FILES['file_weblogo']['tmp_name'];
-//       $file_type=$_FILES['file_weblogo']['type'];
-
-//       $file_ext=strtolower(end(explode('.',$_FILES['file_weblogo']['name'])));
-      
-//       $extensions= array("jpeg","jpg","png");
-      
-//       if(in_array($file_ext,$extensions)=== false){
-//        $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-//       }
-      
-//       if($file_size > 2097152){
-//        $errors[]='File size must be excately 2 MB';
-//       }
-      
-//    }
+if(!isset($_POST['webdetail_submit'])){ // to stop coming to this page using direct url.
+	header("location:../index.php"); 
+	exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,22 +13,66 @@ $errors= array();
 </head>
 <body>
 <div class="centered_aligned_div">
-<?php
-  
-//       if(empty($errors)==true){
-//          move_uploaded_file($file_tmp,"../img/".$file_name);
-//          $file_upload_status = true;
-//       }else{
-//          while($a = each($errors))
-//             echo $a[1]."<br>";
-//             exit();
-//       }
 
-  // if($file_upload_status == false){
-  //     echo "<h1 style='color:red;'>Ops! There has been error in uploading file</h1>";
-  //     echo "<a class='a_button' href='add_new_website.php'>Add Again</a>";
-  //  }
+<?php
+
+include "../testdb.php";
+
+$database = new Database_api("reviewer");
+$row = $database->check_exitance_of_websitename($_POST['txt_webname']);
+
+	if($row==0){
+
+		if(isset($_FILES['file_weblogo'])){
+		    $errors= array();
+		    $file_name = $_FILES['file_weblogo']['name'];
+		    $file_size =$_FILES['file_weblogo']['size'];
+		    $file_tmp =$_FILES['file_weblogo']['tmp_name'];
+		    $file_type=$_FILES['file_weblogo']['type'];
+
+		    $file_ext=strtolower(end(explode('.',$_FILES['file_weblogo']['name'])));
+		    
+		    $extensions= array("jpeg","jpg","png");
+		    
+		    if(in_array($file_ext,$extensions)=== false){
+		       $errors[]="Extension not allowed, please choose a JPEG or PNG file.";
+		    }
+		      
+		    if($file_size > 2097152){
+		       $errors[]='File size must not be larger than 2 MB';
+		    }
+
+		    if(empty($errors)==true){
+		        move_uploaded_file($file_tmp,"../img/".$file_name);
+		        $result =  $database->write_website($_POST['txt_webname'],$file_name);
+		        if($result!=true){
+		            echo "<h1 style='color:red;'>Error in Inserting Website.</h1>";
+		            echo "<a class='a_button' href='add_new_website.php'>Add trying Again</a>";
+		        }
+		        else
+		        {
+		        	echo "<h1 style='color:green;'>Website has been successfully registered.</h1>";
+		        	 echo "<a class='a_button' href='search.php'>Home</a>";
+		        }
+    		}
+    		else{
+		        while($a = each($errors))
+		           echo "<h1 style='color:red;'>".$a[1]."</h1>";
+		           echo "<a class='a_button' href='add_new_website.php'>Add trying Again</a>";
+		           exit();
+    		}
+		      
+		}
+	}
+	else{
+		echo "<h1 style='color:red;'>Website already exists</h1>";
+		echo "<a class='a_button' href='add_new_website.php'>Add trying Again</a>";
+	}
+
+
+
 ?>
+
 </div>
 </body>
 </html>

@@ -37,12 +37,12 @@
 <!---------------DIV that displays details of the website -->
 <?php 
 $database = new Database_api("reviewer");
-$result = $database->fetch_website(3);
+$result = $database->read_website(5);
 $row=mysqli_fetch_assoc($result);
       echo "<div class='MainView'>";
             for ($i=0; $i < 10; $i++) { 
             echo "<form action='detailreview.php' method='POST'>";
-            echo "<button type='submit' name='website_id' value='3'>";
+            echo "<button type='submit' name='website_id' value='5'>";
 	            echo "<div class='mini_website_detail'>";
 					echo "<img src='../img/1_youtube.png' id='mini_logo' height='50' width='50'>";
 					echo "<h2>Youtube</h2>";
