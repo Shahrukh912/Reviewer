@@ -135,6 +135,15 @@ body {
 					top:20px;
 					display: none;
 				}
+				#registration_success_message{ /*-Registation success message-*/
+					color: red;
+					position: absolute;
+					left: 50%;
+					transform: translateX(-50%);
+					z-index: 10;
+					top:40px;
+					display: block;
+				}
 /*------------------------------------Form tag and elements, css----------------------*/
 				
 				.box h1{ /*--box represent the login or signup box that apper after clicking button*/

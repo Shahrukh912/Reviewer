@@ -44,7 +44,7 @@ $row = $database->check_exitance_of_websitename($_POST['txt_webname']);
 
 		    if(empty($errors)==true){
 		        move_uploaded_file($file_tmp,"../img/".$file_name);
-		        $result =  $database->write_website($_POST['txt_webname'],$file_name);
+		        $result =  $database->write_website($_POST['txt_webname'],$file_name); // writing data into database.
 		        if($result!=true){
 		            echo "<h1 style='color:red;'>Error in Inserting Website.</h1>";
 		            echo "<a class='a_button' href='add_new_website.php'>Add trying Again</a>";

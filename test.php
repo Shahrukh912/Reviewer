@@ -1,7 +1,8 @@
-<?php  
-$errors= array();
-$errors[]="Extension not allowed, please choose a JPEG or PNG file.";
-$errors[]='File size must not be larger than 2 MB';
- while($a = each($errors))
-		           echo "<h1 style='color:red;'>".$a[1]."</h1>";
+<?php 
+$_SESSION['registration_success'] = true;
+echo $_SESSION['registration_success'];
+echo (isset($_SESSION['registration_success']))?'block':'none';
+echo mktime();
+echo "<br>";
+echo time();
 ?>

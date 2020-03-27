@@ -27,7 +27,7 @@ class Database_api{
 		public function dbselect(){
 			mysqli_select_db($this->conn,$this->db_database) or die("Unable to select database: ".mysqli_error($this->conn));
 		}
-/*----------------------------------------------------------------------------------*/
+/*-------------------------------USER---------------------------------------------------*/
 		public function authenticate($username,$password){
 			$this->connect();
 			$query = "SELECT username,password from user WHERE username='$username' AND password='$password'";
@@ -35,6 +35,25 @@ class Database_api{
 			$this->disconnect();
 			return $row;
 		}
+		public function check_exitance_of_username($username){
+			$this->connect();
+			$query = "SELECT username from user WHERE username='$username'";
+			$row = mysqli_num_rows(mysqli_query($this->conn,$query));
+			$this->disconnect();
+			return $row;
+		}
+		public function write_user(array $user_detail){
+			$this->connect();
+			$query ="INSERT INTO `user`(`firstname`, `lastname`, `gender`, `email`, `country`, `dob`, `role`,`username`,`password`) VALUES('".$user_detail['firstname']."','".$user_detail['lastname']."','".$user_detail['gender']."','".$user_detail['email']."','".$user_detail['country']."','".$user_detail['dob']."','".$user_detail['role']."','".$user_detail['username']."','".$user_detail['password']."')";
+			$result = mysqli_query($this->conn,$query) or die("Database_class error in function write_review : ".mysqli_error($this->conn));
+			$this->disconnect();
+			return $result;
+		}
+
+
+
+
+
 // -----------------REVIEW---------------
 		public function read_review($website_id){
 			$this->connect();

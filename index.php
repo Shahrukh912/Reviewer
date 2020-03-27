@@ -1,4 +1,5 @@
 <?php
+session_start();
 	include "Database/Database_api.php";
 	$_is_auth_error = 0;
 
@@ -53,6 +54,13 @@
 
 <h2 id="AuthError" style="display: <?php echo ($_is_auth_error==1)?'block':'none'?>;">INCORRECT USERNAME OR PASSWORD.</h2>
 
+<?php
+	if(isset($_SESSION['registration_success'])){
+		echo "<h2 id='registration_success_message' style='color:green;'>REGISTRATION SUCCESSFULL</h2>";
+		unset($_SESSION['registration_success']);
+	}
+?>
+
 <div class="loginpopup">
 	<div class="login">
 		<img src="img/cross.png" onclick="popupshow('login',0)"/>
@@ -71,7 +79,7 @@
 	<div class="signup">
 		<img src="img/cross.png" onclick="popupshow('signup',0)"/>
 		
-		<form class="box" action="Registration/username.php" method="post">
+		<form class="box" action="Registration/securityDetail.php" method="post">
 			<h1>Fill Your Detail</h1>
 			 <input type="text" name="firstname" placeholder="Enter your firstname" required="required">
 			 <input type="text" name="lastname" placeholder="Enter your lastname" required="required">
