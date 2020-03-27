@@ -19,7 +19,10 @@ body {
 			  filter: brightness(20%);
 		}
 		.body-content {
-			position: relative;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
 			text-align: center;
 			z-index: 1;
 			font: sans-serif;
@@ -27,13 +30,13 @@ body {
 
 		}
 		.body-content #maintitle{
-			margin-top: 200px;
+			margin: 0px 0px 10px 0px;
 			font-size: 6em;
 			font-family: "Stencil";
 			color: rgba(100,00,130,0.8);
 		}
 		.body-content #subtitle{
-			margin-top: -50px;
+			margin-top: 2px;
 			font-size: 3em; 
 			color: rgba(180,00,130,0.5);
 		}

@@ -16,7 +16,7 @@ if(!isset($_POST['webdetail_submit'])){ // to stop coming to this page using dir
 
 <?php
 
-include "../testdb.php";
+include "../Database/Database_api.php";
 
 $database = new Database_api("reviewer");
 $row = $database->check_exitance_of_websitename($_POST['txt_webname']);

@@ -1,5 +1,5 @@
 <?php
-    include "../testdb.php";
+    include "../Database/Database_api.php";
 
 ?>
 

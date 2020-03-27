@@ -1,6 +1,6 @@
 <?php
 session_start();
-    include "../testdb.php";
+    include "../Database/Database_api.php";
     if(isset($_POST['review_submit'])){
         $text = $_POST['Opinion'];
         $database = new Database_api("reviewer");
@@ -12,7 +12,7 @@ session_start();
         header("location:$self_url");//to stop repost in database on browser refresh button
         exit(); 
     }
-    else if(!isset($_SESSION['website_id'])){
+    else if(isset( $_POST['website_id'])){ //website id is posted by clicking it on search page
         $_SESSION['website_id'] = $_POST['website_id'];
     }
 
@@ -52,7 +52,7 @@ session_start();
 <!---------------DIV that displays details of the website -->
 <?php 
 $database = new Database_api("reviewer");
-$result = $database->read_website($_SESSION['website_id']);
+$result = $database->read_website(intval($_SESSION['website_id']));
 $row=mysqli_fetch_assoc($result);
       echo "<div class='MainView'>";
             echo "<div class='MainViewleftcolumn'>";
@@ -75,7 +75,7 @@ if($result !=NULL){
       echo "<div class='card'>";
         echo "<h2>".$row["name"]."</h2>";
         echo "<h5>Title description, Sep 2, 2017</h5>";
-        echo "<p>".htmlentities(nl2br($row["desciption"]))."</p>";
+        echo "<p>".nl2br(htmlentities($row["desciption"]))."</p>";
       echo "</div>";
     }
 }
@@ -88,7 +88,7 @@ else{
 <!-- ---------------------------------------------------------------- -->
       <div class="card">
             <form action="<?php $_PHP_SELF ?>" method="POST">
-                <textarea name="Opinion" cols="100" rows="5" placeholder="Write Your Opinion"></textarea><br>
+                <textarea name="Opinion" cols="100" rows="5" placeholder="Write Your Opinion" required="required"></textarea><br>
                 <input type="submit" name="review_submit" value="Submit">
             </form>
       </div>

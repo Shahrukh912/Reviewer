@@ -1,5 +1,5 @@
 <?php
-	include "testdb.php";
+	include "Database/Database_api.php";
 	$_is_auth_error = 0;
 
 /*-----------------ON SUBMIT BUTTON OF LOGIN CLICK------------------*/
@@ -71,18 +71,18 @@
 	<div class="signup">
 		<img src="img/cross.png" onclick="popupshow('signup',0)"/>
 		
-		<form class="box" action="<?php $_PHP_SELF?>" method="post">
+		<form class="box" action="Registration/username.php" method="post">
 			<h1>Fill Your Detail</h1>
 			 <input type="text" name="firstname" placeholder="Enter your firstname" required="required">
 			 <input type="text" name="lastname" placeholder="Enter your lastname" required="required">
-			 <select id="gender">
-				  <option value="male" selected="selected">Male</option>
-				  <option value="female">Female</option>
+			 <select id="gender" name="gender">
+				  <option value="Male" selected="selected">Male</option>
+				  <option value="Female">Female</option>
 				  <option value="other">Other</option>
 			 </select> 
 			 <input type="date" name="dob" required>
 			 <input type="email" name="email" placeholder="Enter your email">
-			 <select id="country">
+			 <select id="country" name="country">
 				  <option value="India">India</option>
 				  <option value="Pakistan">Pakistan</option>
 				  <option value="China">China</option>
@@ -90,7 +90,7 @@
 				  <option value="Myanmar">Myanmar</option>
 				  <option value="Japan">Japan</option>
 			 </select>
-			 <input type="submit" name="signupsubmit" value="Submit">
+			 <input type="submit" name="signup_submit" value="Next">
 		</form>
 		
 	</div>
