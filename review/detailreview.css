@@ -109,8 +109,9 @@ body {
   width: 60%;
   padding-left: 0px;
 }
-.MainViewrightcolumn td{
-  padding: 0px 30px 5px 0px;
+
+.MainViewrightcolumn h3{
+ margin: 0px 30px 15px 0px;
 }
 
 .MainView .MainViewleftcolumn img{
@@ -118,6 +119,18 @@ body {
 		width:300px;
 		border-radius: 100%;
 }
+.MainView .MainViewfooter {
+    padding-top: 10px;
+    width: 100%;
+    clear: both;
+}
+
+/*.reviewadder{
+  position: fixed;
+  bottom: 0;
+  right: 0;;
+}*/
+
 
 textarea{
     width: 100%;

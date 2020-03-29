@@ -8,10 +8,14 @@ session_start();
 		$username = $_POST["username"];
 		$password = $_POST["password"];
 		$database = new Database_api("reviewer");
-		$row = $database->authenticate($username,$password);
+		$no_of_row = $database->authenticate($username,$password);
 
-		if($row==1){
-			header("location:review/detailreview.php");
+		if($no_of_row==1){
+			$result = $database->get_id_using_authentication($username,$password);
+			$row = mysqli_fetch_assoc($result);
+			$_SESSION['user_id'] = $row['id']; // storing user id in session 
+			$_SESSION['user_name'] = $row['firstname']; // storing user name in session 
+			header("location:review/Home.php");
 		}
 		else
 		{
@@ -53,13 +57,6 @@ session_start();
 </div>
 
 <h2 id="AuthError" style="display: <?php echo ($_is_auth_error==1)?'block':'none'?>;">INCORRECT USERNAME OR PASSWORD.</h2>
-
-<?php
-	if(isset($_SESSION['registration_success'])){
-		echo "<h2 id='registration_success_message' style='color:green;'>REGISTRATION SUCCESSFULL</h2>";
-		unset($_SESSION['registration_success']);
-	}
-?>
 
 <div class="loginpopup">
 	<div class="login">

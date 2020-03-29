@@ -43,6 +43,9 @@
                         <td>Name </td><td><input type="text" name="txt_webname" required="required"></td>
                     </tr>
                     <tr>
+                        <td>Description </td><td><textarea name="website_description" required="required"></textarea></td>
+                    </tr>
+                    <tr>
                         <td>Select Logo </td><td><input type="file" name="file_weblogo" required="required"></td>
                     </tr>
                     <tr>
