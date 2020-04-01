@@ -50,6 +50,7 @@ body {
 /* Add a card effect for articles */
 .card {
    background-color: white;
+   position: relative;
    padding: 20px;
    margin-top: 20px;
    border-radius: 10px;
@@ -155,4 +156,28 @@ textarea{
 		padding-left: 10px;
 	}
 
+}
+/*  Like dislike division css-----*/
+.like_dislike{
+  float: left;
+  width:100%;
+}
+.like_dislike input[type='submit']{
+  padding: 5px 30px;
+  outline: none;
+  border-radius: 6px;
+  margin-right: 5px;
+}
+/*---------------------------------*/
+.review_show h5{
+  position: absolute;
+  right: 30px;
+  top: 0;
+}
+.review_show h2{
+  margin: 0px;
+}
+.review_show h6{
+  margin-top: 5px;
+  margin-bottom: 5px;
 }

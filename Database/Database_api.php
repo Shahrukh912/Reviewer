@@ -104,7 +104,10 @@ class Database_api{
 		}
 		public function read_website_related($website){
 			$this->connect();
-			$query = "SELECT * from website WHERE name LIKE '%".$website."%' AND name!='$website'";
+			if(strlen($website)<=2)
+				$query = "SELECT * from website WHERE name LIKE '".$website."%' AND name!='$website'";
+			else
+				$query = "SELECT * from website WHERE name LIKE '%".$website."%' AND name!='$website'";
 	
 			$result = mysqli_query($this->conn,$query) or die("Database_class error in function read_website : ".mysqli_error($this->conn));
 			$this->disconnect();
@@ -132,6 +135,38 @@ class Database_api{
 			$this->disconnect();
 			return $row;
 		}
+// ----------------------LIKES AND DISLIKES-------------------------------------------
+		public function read_like_dislike($website_id,$user_id){
+			$this->connect();
+			$query = "SELECT * from likes WHERE website_id='$website_id' AND user_id='$user_id'";
+			$row_likes = mysqli_num_rows(mysqli_query($this->conn,$query));
 
-	}
+			$query = "SELECT * from dislikes WHERE website_id='$website_id' AND user_id='$user_id'";
+			$row_dislikes = mysqli_num_rows(mysqli_query($this->conn,$query));
+			$this->disconnect();
+			
+			if($row_likes==1)
+				return "like";
+			else if($row_dislikes==1)
+				return "dislike";
+			else 
+				return NULL;	
+		}
+		public function write_like_dislike($table,$website_id,$user_id){
+			$this->connect();
+			if($table=="like"){
+				$query = "DELETE from dislikes WHERE website_id='$website_id' AND user_id='$user_id'";
+				mysqli_query($this->conn,$query);
+				$query = "INSERT INTO likes(website_id,user_id) VALUES ('".$website_id."','".$user_id."')";
+				mysqli_query($this->conn,$query);
+
+			}
+			else if($table=="dislike"){
+				$query = "DELETE from likes WHERE website_id='$website_id' AND user_id='$user_id'";
+				mysqli_query($this->conn,$query);
+				$query = "INSERT INTO dislikes(website_id,user_id) VALUES ('".$website_id."','".$user_id."')";
+				mysqli_query($this->conn,$query);
+			}
+		}
+	} // database_api class ending
 ?>
