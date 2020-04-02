@@ -55,7 +55,7 @@ $row = $database->check_exitance_of_websitename($_POST['txt_webname']);
 		        else
 		        {
 		        	echo "<h1 style='color:green;'>Website has been successfully registered.</h1>";
-		        	 echo "<a class='a_button' href='search.php'>Home</a>";
+		        	 echo "<a class='a_button' href='home.php'>Home</a>";
 		        }
     		}
     		else{

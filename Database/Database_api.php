@@ -27,6 +27,12 @@ class Database_api{
 		public function dbselect(){
 			mysqli_select_db($this->conn,$this->db_database) or die("Unable to select database: ".mysqli_error($this->conn));
 		}
+		public function execute($query){
+			$this->connect();
+			$result = mysqli_query($this->conn,$query);
+			$this->disconnect();
+			return $result;
+		}
 /*-------------------------------USER---------------------------------------------------*/
 		public function authenticate($username,$password){
 			$this->connect();
@@ -51,21 +57,41 @@ class Database_api{
 		}
 		public function write_user(array $user_detail){
 			$this->connect();
-			$query ="INSERT INTO `user`(`firstname`, `lastname`, `gender`, `email`, `country`, `dob`, `role`,`username`,`password`) VALUES('".$user_detail['firstname']."','".$user_detail['lastname']."','".$user_detail['gender']."','".$user_detail['email']."','".$user_detail['country']."','".$user_detail['dob']."','".$user_detail['role']."','".$user_detail['username']."','".$user_detail['password']."')";
+			date_default_timezone_set('Asia/Kolkata');
+			$query ="INSERT INTO `user`(`firstname`, `lastname`, `gender`, `email`, `country`, `dob`,`dtoi`, `role`,`username`,`password`) VALUES('".$user_detail['firstname']."','".$user_detail['lastname']."','".$user_detail['gender']."','".$user_detail['email']."','".$user_detail['country']."','".$user_detail['dob']."','".date('Y-m-d h:i:s', time())."','".$user_detail['role']."','".$user_detail['username']."','".$user_detail['password']."')";
 			$result = mysqli_query($this->conn,$query) or die("Database_class error in function write_review : ".mysqli_error($this->conn));
 			$this->disconnect();
 			return $result;
 		}
-
-
-
-
-
+		public function read_user($user_id){
+			$this->connect();
+			$query = "SELECT firstname,lastname,gender,email,country,dob,dtoi,username from user WHERE id=$user_id";
+			$result = mysqli_query($this->conn,$query) or die("Database_class error in function read_user : ".mysqli_error($this->conn));
+			$this->disconnect();
+			if((mysqli_num_rows($result))<=0){
+				return NULL;
+			}
+			else{
+				return $result;
+			}
+		}
+		public function update_user(array $user_detail,$user_id){
+			$this->connect();
+			$query = "UPDATE user set firstname='".$user_detail['firstname']."',lastname='".$user_detail['lastname']."',gender='".$user_detail['gender']."',email='".$user_detail['email']."',country='".$user_detail['country']."',dob='".$user_detail['dob']."' WHERE id=$user_id";
+			$result = mysqli_query($this->conn,$query) or die("Database_class error in function read_user : ".mysqli_error($this->conn));
+			$this->disconnect();
+		}
+		public function update_password($user_id,$password){
+			$this->connect();
+			$query = "UPDATE user set password='$password' WHERE id=$user_id";
+			$result = mysqli_query($this->conn,$query) or die("Database_class error in function update_password : ".mysqli_error($this->conn));
+			$this->disconnect();
+		}
 // -----------------REVIEW---------------
 		public function read_review($website_id){
 			$this->connect();
 			$query = "SELECT u.firstname,r.description,r.rating,r.dtoi from user u,review r WHERE r.website_id=$website_id AND r.user_id=u.id ORDER BY r.dtoi DESC LIMIT 10";
-			$result = mysqli_query($this->conn,$query) or die("Database_class error in function read_review : ".mysqli_error($this->conn));;
+			$result = mysqli_query($this->conn,$query) or die("Database_class error in function read_review : ".mysqli_error($this->conn));
 			$this->disconnect();
 			if((mysqli_num_rows($result))<=0){
 				return NULL;
@@ -103,11 +129,17 @@ class Database_api{
 			}
 		}
 		public function read_website_related($website){
+			$disallowed = array("%","*","`","_","/");
+			foreach ($disallowed as $value) {
+				if(strrpos($website, $value)!==false){
+					return NULL;
+				}
+			}
 			$this->connect();
 			if(strlen($website)<=2)
-				$query = "SELECT * from website WHERE name LIKE '".$website."%' AND name!='$website'";
+				$query = "SELECT * from website_detail_statistic WHERE name LIKE '".$website."%' AND name!='$website'";
 			else
-				$query = "SELECT * from website WHERE name LIKE '%".$website."%' AND name!='$website'";
+				$query = "SELECT * from website_detail_statistic WHERE name LIKE '%".$website."%' AND name!='$website'";
 	
 			$result = mysqli_query($this->conn,$query) or die("Database_class error in function read_website : ".mysqli_error($this->conn));
 			$this->disconnect();
@@ -118,8 +150,30 @@ class Database_api{
 				return $result;
 			}
 		}
-		
-		
+		public function read_website_liked($user_id){
+			$this->connect();
+			$query = "SELECT wds.id,wds.logourl,wds.name,wds.description,wds.dtoi,wds.reviews,wds.likes,wds.dislikes FROM likes l,website_detail_statistic wds WHERE l.website_id=wds.id AND l.user_id=$user_id LIMIT 10";
+			$result = mysqli_query($this->conn,$query) or die("Database_class error in function read_website_liked : ".mysqli_error($this->conn));
+			$this->disconnect();
+			if((mysqli_num_rows($result))<=0){
+				return NULL;
+			}
+			else{
+				return $result;
+			}
+		}		
+		public function read_website_disliked($user_id){
+			$this->connect();
+			$query = "SELECT wds.id,wds.logourl,wds.name,wds.description,wds.dtoi,wds.reviews,wds.likes,wds.dislikes FROM dislikes d,website_detail_statistic wds WHERE d.website_id=wds.id AND d.user_id=$user_id LIMIT 10";
+			$result = mysqli_query($this->conn,$query) or die("Database_class error in function read_website_disliked : ".mysqli_error($this->conn));
+			$this->disconnect();
+			if((mysqli_num_rows($result))<=0){
+				return NULL;
+			}
+			else{
+				return $result;
+			}
+		}		
 		public function write_website($website_name,$website_description,$logourl,$user_id){
 			$this->connect();
 			$website_description = mysqli_real_escape_string($this->conn,$website_description);

@@ -31,14 +31,17 @@ include "../Database/Database_api.php";
 		$result = $database->write_user($_SESSION['user_detail']);
 		
 		if($result!=true){
-	        echo "<h1 style='color:red;'>Error in Inserting Website.</h1>";
+	        echo "<h1 style='color:red;'>Error in Registration user.</h1>";
 	        echo "<a href='../index.php'>Try Again</a>";
 	        exit();
 	    }
 	    else{
+	    	$result = $database->get_id_using_authentication($_SESSION['user_detail']['username'],$_SESSION['user_detail']['password']);
+			$row = mysqli_fetch_assoc($result);
+			$_SESSION['user_id'] = $row['id']; // storing user id in session 
+			$_SESSION['user_name'] = $row['firstname']; // storing user name in session
 	    	unset($_SESSION['user_detail']);
-	    	echo "<h1 style='color:green;'>Congratulations! You have been successfully registered.</h1>";
-	    	echo "<a class='a_button' href='../index.php'>Go To Login Page</a>";
+	    	header("location:../review/Profile.php?msg=You have been Successfully registered");
 	    }
 	}
 ?>

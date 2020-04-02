@@ -1,0 +1,54 @@
+ 				td{
+		            padding: 5px 40px 5px 2px;
+		        }
+		        .profile h5{
+		            position: absolute;
+		            right: 20px;
+		            top:0;
+		        }
+ 				input[type]{
+				  border:0;
+				  background: none;
+				  display: inline-block;
+				  border: 2px solid #3498db;
+				  padding: 8px 10px;
+				  width: 220px;
+				  outline: none;
+				  color:black;
+				  border-radius: 5px;
+				  transition: 0.25s;
+				}
+
+				 select{
+				  border:0;
+				  background: none;
+				  display: inline-block;
+				  border: 2px solid #3498db;
+				  padding: 8px 10px;
+				  width: 220px;
+				  outline: none;
+				  color:black;
+				  border-radius: 5px;
+				  transition: 0.25s;
+				}
+
+				 input[type = "submit"], input[type = "reset"]{
+				  border:0;
+				  background: none;
+				  display: block;
+				  margin-top: 15px;
+				  width: 120px;
+				  border: 2px solid #2ecc71;
+				  padding: 8px 10px;
+				  outline: none;
+				  color:black;
+				  border-radius: 5px;
+				  transition: 0.25s;
+				  cursor: pointer;
+				}
+				 input[type = "submit"]:focus{
+				  width: 120px;
+				}
+				 input[type = "submit"]:hover{
+				  background: #2ecc71;
+				}

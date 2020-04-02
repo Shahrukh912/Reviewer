@@ -97,6 +97,7 @@ body {
     height: 40px;
     line-height: 40px;
     padding: 0px 10px;
+    margin-top: 10px;
     background-color: #aaaaaa;
     border-radius: 5px;
     color: black;
@@ -163,13 +164,14 @@ textarea{
   width:100%;
 }
 .like_dislike input[type='submit']{
-  padding: 5px 30px;
+  width: 46%;
+  padding: 5px 0px;
   outline: none;
   border-radius: 6px;
   margin-right: 5px;
 }
 /*---------------------------------*/
-.review_show h5{
+.review_show h5, #h5ofwebsitedetail{
   position: absolute;
   right: 30px;
   top: 0;
@@ -180,4 +182,7 @@ textarea{
 .review_show h6{
   margin-top: 5px;
   margin-bottom: 5px;
+}
+.review_show p{
+  margin-bottom: 0px;
 }

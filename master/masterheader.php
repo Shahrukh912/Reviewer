@@ -3,6 +3,12 @@ if(isset($_POST['logout'])){
 	session_destroy();
 	header("location:../index.php");
 }
+elseif (isset($_POST['Profile'])) {
+	header("location:Profile.php");
+}
+elseif (isset($_POST['About'])) {
+	header("location:About.php");
+}
 
 ?>
 <div class="HeaderMain">
@@ -17,8 +23,8 @@ if(isset($_POST['logout'])){
 	</div>
 	<div class="navbuttons">
 		<form action="<?php $_PHP_SELF?>" method="post">
-		    <button type="submit" formmethod="post">Profile</button>
-			<button >About us</button>
+		    <button type="submit" name="Profile">Profile</button>
+			<button type="submit" name="About">About us</button>
 			<button type="submit" formmethod="post" name="logout" value="logout">Logout</button>
 		</form>
 	</div>

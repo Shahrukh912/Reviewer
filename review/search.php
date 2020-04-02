@@ -41,8 +41,18 @@ if (isset($_GET['search'])) {
             	            echo "<div class='mini_website_detail'>";
             					echo "<img src='../img/website_logos/".$row['logourl']."' id='mini_logo' height='50' width='50'>";
             					echo "<h2>".$row['name']."</h2>";
-            					echo "<img src='../img/like.png'>".$row['likes'];
-            					echo " <img src='../img/dislike.jpg'>".$row['dislikes'];
+            					echo "<img src='../img/like.png'>";
+                                if($row['likes']!=NULL){
+                                    echo $row['likes']; 
+                                }
+                                else
+                                    echo "0";
+            					echo " <img src='../img/dislike.jpg'>";
+                                if($row['dislikes']!=NULL){
+                                    echo $row['dislikes']; 
+                                }
+                                else
+                                    echo "0";
             				echo "</div></a>";            
                   echo "</div>";
         }
@@ -66,9 +76,19 @@ if (isset($_GET['search'])) {
                     echo "<div class='mini_website_detail'>";
                         echo "<img src='../img/website_logos/".$row['logourl']."' id='mini_logo' height='50' width='50'>";
                         echo "<h2>".$row['name']."</h2>";
-                        // echo "<img src='../img/like.png'>".$row['likes'];
-                        // echo " <img src='../img/dislike.jpg'>".$row['dislikes'];
-                echo "</div></a>"; 
+                        echo "<img src='../img/like.png'>";
+                                if($row['likes']!=NULL){
+                                    echo $row['likes']; 
+                                }
+                                else
+                                    echo "0";
+                                echo " <img src='../img/dislike.jpg'>";
+                                if($row['dislikes']!=NULL){
+                                    echo $row['dislikes']; 
+                                }
+                                else
+                                    echo "0";
+                    echo "</div></a>"; 
             }           
             echo "</div>";
         }

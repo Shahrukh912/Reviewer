@@ -87,13 +87,13 @@ session_start();
 			 </select> 
 			 <input type="date" name="dob" required>
 			 <input type="email" name="email" placeholder="Enter your email">
-			 <select id="country" name="country">
-				  <option value="India">India</option>
-				  <option value="Pakistan">Pakistan</option>
-				  <option value="China">China</option>
-				  <option value="Sri Lanka">Sri Lanka</option>
-				  <option value="Myanmar">Myanmar</option>
-				  <option value="Japan">Japan</option>
+
+			 <select id="country" name="country" rows="5">
+<?php $countries=array("India","Pakistan","China","Nepal","Japan","Russia","Sri Lanka");
+			foreach ($countries as $country) {
+				echo "<option value='$country'>$country</option>";
+			}
+?>
 			 </select>
 			 <input type="submit" name="signup_submit" value="Next">
 		</form>

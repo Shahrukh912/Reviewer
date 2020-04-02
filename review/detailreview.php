@@ -17,12 +17,9 @@ $database = new Database_api("reviewer");
     else  if(isset($_POST['like_dislike'])){
         $database->write_like_dislike($_POST['like_dislike'],$_GET['website_id'],$_SESSION['user_id']);
     }
-    // else if(isset( $_GET['website_id'])){ //website id is posted by clicking it on search page
-    //     $_SESSION['website_id'] = ;
-    // }
-    // else{
-    //     header("location:home.php");
-    // }
+    else if(!isset( $_GET['website_id'])){ //website id is posted by clicking it on search page
+         header("location:home.php");
+    }
 
 ?>
 
@@ -51,6 +48,7 @@ $row=mysqli_fetch_assoc($result);
                 echo "<img src='../img/website_logos/".$row['logourl']."'/>";
             echo "</div>";
             echo "<div class='MainViewrightcolumn'>";
+                echo "<h5 id='h5ofwebsitedetail'>Added on : ".date("d-M-Y h:i:s a",strtotime($row['dtoi']))."</h5>";
                 echo "<table><th><h1>".$row['name']."</h1></th>";
                 /////////////RATING///////////////////////////////////
                 echo "<tr><td><h3> Average rating </h3></td><td><h3>";
@@ -59,7 +57,7 @@ $row=mysqli_fetch_assoc($result);
                   }
                   else
                     echo "0";
-                echo "</h3></td><tr>";
+                echo "</h3></td></tr>";
                 /////////////////NO OF REVIEWS//////////////////////
                 echo "<tr><td><h3> No of Reviews </h3></td><td><h3>";
                 if($row['reviews']!=NULL){
@@ -75,7 +73,7 @@ $row=mysqli_fetch_assoc($result);
                   }
                   else
                     echo "0";
-                echo "</h3></td><tr>";
+                echo "</h3></td><t/r>";
                 ////////////////DISLIKES//////////////////////////////
                 echo "<tr><td><h3> Dislikes </h3></td><td><h3>";
                 if($row['dislikes']!=NULL){
@@ -83,7 +81,7 @@ $row=mysqli_fetch_assoc($result);
                   }
                   else
                     echo "0";
-                echo "</h3></td><tr>";
+                echo "</h3></td></tr>";
                 echo "<tr><td colspan='2'>";
 
                 $result = $database->read_like_dislike($_GET['website_id'],$_SESSION['user_id']);//getting like-dislike data ?>
@@ -109,7 +107,7 @@ if($result !=NULL){
         # code...
       echo "<div class='card review_show'>";
         echo "<h2>".$row["firstname"]."</h2>";
-        echo "<h5>".$row['dtoi']."</h5>";
+        echo "<h5>".date("d-M-Y h:i:s a",strtotime($row['dtoi']))."</h5>";
         echo "<h6>Rating : ".$row['rating']." out of 10</h6>";
         echo "<p>".nl2br(htmlentities($row["description"]))."</p>";
       echo "</div>";
