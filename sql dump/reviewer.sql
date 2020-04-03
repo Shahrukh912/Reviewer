@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2020 at 06:23 PM
+-- Generation Time: Apr 03, 2020 at 04:46 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -228,7 +228,7 @@ CREATE TABLE `website_likes_dislikes` (
 --
 DROP TABLE IF EXISTS `website_detail_statistic`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `website_detail_statistic`  AS  (select `w`.`id` AS `id`,`w`.`logourl` AS `logourl`,`w`.`name` AS `name`,`w`.`description` AS `description`,`w`.`dtoi` AS `dtoi`,avg(`r`.`rating`) AS `rating`,count(`r`.`website_id`) AS `reviews`,`wld`.`likes` AS `likes`,`wld`.`dislikes` AS `dislikes` from ((`website` `w` left join `review` `r` on((`w`.`id` = `r`.`website_id`))) left join `website_likes_dislikes` `wld` on((`w`.`id` = `wld`.`id`))) group by `r`.`website_id`) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `website_detail_statistic`  AS  (select `w`.`id` AS `id`,`w`.`logourl` AS `logourl`,`w`.`name` AS `name`,`w`.`description` AS `description`,`w`.`dtoi` AS `dtoi`,avg(`r`.`rating`) AS `rating`,count(`r`.`website_id`) AS `reviews`,`wld`.`likes` AS `likes`,`wld`.`dislikes` AS `dislikes` from ((`website` `w` left join `review` `r` on((`w`.`id` = `r`.`website_id`))) left join `website_likes_dislikes` `wld` on((`w`.`id` = `wld`.`id`))) group by `w`.`id`) ;
 
 -- --------------------------------------------------------
 
@@ -316,7 +316,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `website`
 --
 ALTER TABLE `website`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
