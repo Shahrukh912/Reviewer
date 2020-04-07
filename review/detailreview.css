@@ -4,23 +4,16 @@
 
 /* Add a gray background color with some padding */
 body {
+  margin:0px;
   font-family: Arial;
-  padding: 20px;
   background-color: #f5f5f5;
 }
-
-
-.HeaderMain{ /*----Entire header-------*/
-	position: relative;
-    left: -28px;
-    top: -27px;
-}
-
 
 
 /*------------------------------------------------------------------------------*/
 .row{
 	margin-top: 0px;
+  padding: 20px;
 }
 
 

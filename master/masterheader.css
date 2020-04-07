@@ -1,31 +1,40 @@
 		.HeaderMain{ /*----Entire header-------*/
-			width: 104%;
-			height: 80px;
+			width: 100%;
+			height: 60px;
+			padding: 0px 15px;
 			background-color: #191919;
 			overflow: hidden;
+			clear: both;
 		}
 		.HeaderMain .webname{/*---left side name of the web div in header------*/
 			float: left;
 			width: 20%;
 			height: 100%;
+			font-size: 50px;
+			font-family: "Stencil";
+			color: rgba(100,00,130,0.8);
+			margin: 0px;
 		}
 			.HeaderMain .webname p{/* the textstyle in which the name is written*/
-				font-size: 50px;
-				margin-top: 0px;
-				padding: 10px 15px;
-				font-family: "Stencil";
-				color: rgba(100,00,130,0.8);
+				margin: inherit;
 			}
+		
 		.HeaderMain .search{/*---middle search bar div in header------*/
 			float: left;
 			width: 50%;
 			height: 100%;
+			margin-top: -12px;
 		}
+		.HeaderMain .search form{/*---middle search bar div in header------*/
+			margin-left: 15px;
+    		height: inherit;
+   			width: 100%;
+		}
+
 			.HeaderMain .search input[type="search"]{/*---css for the serach bar------*/
-				border:0;
 				background: none;
 				display: inline-block;
-				margin: 20px auto;
+				margin: inherit;
 				text-align: center;
 				border: 2px solid #3498db;
 				padding: 14px 10px;
@@ -59,14 +68,14 @@
 
 		.HeaderMain .navbuttons{ /*--- the right side of header for buttons---*/
 			float: left;
-			width: 25%;
+			width: 30%;
 			height: 100%;
 		}
 
 			.HeaderMain .navbuttons button{ /*-- the right side buttons---*/
 				padding: 10px 25px;
-				margin: 15px 7px;
-				height: 50px;
+				margin: 10px 7px;
+				height: 42px;
 				border-radius: 10px;
 				border-style: none;
 				outline: none;

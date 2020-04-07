@@ -28,7 +28,6 @@ $database = new Database_api("reviewer");
 <head>
 	<title>Welcome</title>
 	<link rel="stylesheet" type="text/css" href="detailreview.css">
-    <link rel="stylesheet" type="text/css" href="../master/masterheader.css">
 </head>
 <body>
 
@@ -141,10 +140,7 @@ else{
     </div><!--Right column div end--->    
 </div><!--Row div end--->
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
-
+<?php include "../master/masterfooter.php"; ?> <!-- to add footer -->
 
 </body>
 </html>

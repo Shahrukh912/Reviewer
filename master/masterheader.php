@@ -11,7 +11,10 @@ elseif (isset($_POST['About'])) {
 }
 
 ?>
-<div class="HeaderMain">
+
+<link rel="stylesheet" type="text/css" href="../master/masterheader.css">
+
+<header class="HeaderMain">
 	<div class="webname">
 		<p>Reviewer</p>
 	</div>
@@ -28,4 +31,4 @@ elseif (isset($_POST['About'])) {
 			<button type="submit" formmethod="post" name="logout" value="logout">Logout</button>
 		</form>
 	</div>
-</div>
+</header>

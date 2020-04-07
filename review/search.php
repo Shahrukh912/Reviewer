@@ -14,7 +14,6 @@ if(!isset($_SESSION['user_name'])){ // to stop coming to this page directly
 <head>
 	<title>Welcome</title>
 	<link rel="stylesheet" type="text/css" href="detailreview.css">
-    <link rel="stylesheet" type="text/css" href="../master/masterheader.css">
     <link rel="stylesheet" type="text/css" href="Search.css">
 </head>
 <body>
@@ -101,10 +100,7 @@ if (isset($_GET['search'])) {
     </div><!--Right column div end--->    
 </div><!--Row div end--->
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
-
+<?php include "../master/masterfooter.php"; ?> <!-- to add footer -->
 
 </body>
 </html>
