@@ -171,31 +171,17 @@ INSERT INTO `website` (`id`, `name`, `description`, `logourl`, `user_id`, `dtoi`
 
 -- --------------------------------------------------------
 
---
--- Stand-in structure for view `website_detail_statistic`
--- (See below for the actual view)
---
-CREATE TABLE `website_detail_statistic` (
-`id` int(100)
-,`logourl` varchar(50)
-,`name` varchar(50)
-,`description` text
-,`dtoi` timestamp
-,`rating` decimal(14,4)
-,`reviews` bigint(21)
-,`likes` bigint(21)
-,`dislikes` bigint(21)
-);
-
--- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `website_dislikes`
 -- (See below for the actual view)
 --
-CREATE TABLE `website_dislikes` (
-`id` int(100)
-,`dislikes` bigint(21)
+CREATE VIEW website_dislikes
+AS
+(
+  SELECT w.id, count(d.website_id)'dislikes' from website w 
+  LEFT JOIN dislikes d ON w.id=d.website_id 
+  GROUP BY w.id
 );
 
 -- --------------------------------------------------------
@@ -204,9 +190,12 @@ CREATE TABLE `website_dislikes` (
 -- Stand-in structure for view `website_likes`
 -- (See below for the actual view)
 --
-CREATE TABLE `website_likes` (
-`id` int(100)
-,`likes` bigint(21)
+CREATE VIEW website_likes
+AS
+(
+  SELECT w.id, count(l.website_id)'likes' from website w 
+  LEFT JOIN likes l ON w.id=l.website_id 
+  GROUP BY w.id
 );
 
 -- --------------------------------------------------------
@@ -215,51 +204,33 @@ CREATE TABLE `website_likes` (
 -- Stand-in structure for view `website_likes_dislikes`
 -- (See below for the actual view)
 --
-CREATE TABLE `website_likes_dislikes` (
-`id` int(100)
-,`likes` bigint(21)
-,`dislikes` bigint(21)
+CREATE VIEW website_likes_dislikes
+AS
+(
+  SELECT w.id, wl.likes,wd.dislikes from website w 
+  LEFT JOIN website_likes wl ON w.id=wl.id 
+  LEFT JOIN website_dislikes wd ON w.id=wd.id
 );
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `website_detail_statistic`
+-- Stand-in structure for view `website_detail_statistic`
+-- (See below for the actual view)
 --
-DROP TABLE IF EXISTS `website_detail_statistic`;
+CREATE VIEW website_detail_statistic
+AS
+(
+  SELECT w.id,w.logourl,w.name,w.description,w.dtoi,AVG(r.rating)'rating',count(website_id)'reviews',wld.likes,wld.dislikes FROM website w
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `website_detail_statistic`  AS  (select `w`.`id` AS `id`,`w`.`logourl` AS `logourl`,`w`.`name` AS `name`,`w`.`description` AS `description`,`w`.`dtoi` AS `dtoi`,avg(`r`.`rating`) AS `rating`,count(`r`.`website_id`) AS `reviews`,`wld`.`likes` AS `likes`,`wld`.`dislikes` AS `dislikes` from ((`website` `w` left join `review` `r` on((`w`.`id` = `r`.`website_id`))) left join `website_likes_dislikes` `wld` on((`w`.`id` = `wld`.`id`))) group by `w`.`id`) ;
+  LEFT JOIN review r ON w.id=r.website_id
+
+  LEFT JOIN website_likes_dislikes wld ON w.id = wld.id
+
+  GROUP BY w.id
+);
 
 -- --------------------------------------------------------
-
---
--- Structure for view `website_dislikes`
---
-DROP TABLE IF EXISTS `website_dislikes`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `website_dislikes`  AS  (select `w`.`id` AS `id`,count(`d`.`website_id`) AS `dislikes` from (`website` `w` join `dislikes` `d` on((`w`.`id` = `d`.`website_id`))) group by `w`.`id`) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `website_likes`
---
-DROP TABLE IF EXISTS `website_likes`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `website_likes`  AS  (select `w`.`id` AS `id`,count(`l`.`website_id`) AS `likes` from (`website` `w` join `likes` `l` on((`w`.`id` = `l`.`website_id`))) group by `w`.`id`) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `website_likes_dislikes`
---
-DROP TABLE IF EXISTS `website_likes_dislikes`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `website_likes_dislikes`  AS  (select `w`.`id` AS `id`,`wl`.`likes` AS `likes`,`wd`.`dislikes` AS `dislikes` from ((`website` `w` left join `website_likes` `wl` on((`w`.`id` = `wl`.`id`))) left join `website_dislikes` `wd` on((`w`.`id` = `wd`.`id`)))) ;
-
---
--- Indexes for dumped tables
---
 
 --
 -- Indexes for table `dislikes`
