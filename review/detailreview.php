@@ -88,8 +88,8 @@ $row=mysqli_fetch_assoc($result);
                 <!-- Like Dislike Division -->
                 <div class="like_dislike">
                   <form action="<?php $_PHP_SELF?>" method='post'>
-                  <input type="submit" name="like_dislike" <?php if($result=='like'){ echo "value='liked' style= 'background-color:#3498db; color:white;' disabled='disabled'";}else{echo "value='like'";} ?>>
-                  <input type="submit" name="like_dislike" <?php if($result=='dislike'){ echo "value='disliked' style= 'background-color:#3498db; color:white;' disabled='disabled'";}else{echo "value='dislike'";} ?>>
+                  <input type="submit" name="like_dislike" <?php if($result=='like'){ echo "value='liked' style= 'background-color:#3498db; color:white;' ";}else{echo "value='like'";} ?>>
+                  <input type="submit" name="like_dislike" <?php if($result=='dislike'){ echo "value='disliked' style= 'background-color:#3498db; color:white;' ";}else{echo "value='dislike'";} ?>>
                    </form>
                 </div>
 

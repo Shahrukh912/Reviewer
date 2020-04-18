@@ -206,21 +206,28 @@ class Database_api{
 			else 
 				return NULL;	
 		}
-		public function write_like_dislike($table,$website_id,$user_id){
+		public function write_like_dislike($value,$website_id,$user_id){
 			$this->connect();
-			if($table=="like"){
+			$query="";
+			if($value=="like"){
 				$query = "DELETE from dislikes WHERE website_id='$website_id' AND user_id='$user_id'";
 				mysqli_query($this->conn,$query);
 				$query = "INSERT INTO likes(website_id,user_id) VALUES ('".$website_id."','".$user_id."')";
-				mysqli_query($this->conn,$query);
-
 			}
-			else if($table=="dislike"){
+			else if($value=="dislike"){
 				$query = "DELETE from likes WHERE website_id='$website_id' AND user_id='$user_id'";
 				mysqli_query($this->conn,$query);
 				$query = "INSERT INTO dislikes(website_id,user_id) VALUES ('".$website_id."','".$user_id."')";
-				mysqli_query($this->conn,$query);
 			}
+			else if($value=="liked"){
+				$query = "DELETE from likes WHERE website_id='$website_id' AND user_id='$user_id'";
+			}
+			else if($value=="dislike"){
+				$query = "DELETE from dislikes WHERE website_id='$website_id' AND user_id='$user_id'";
+			}
+
+			mysqli_query($this->conn,$query);
+
 		}
 	} // database_api class ending
 ?>

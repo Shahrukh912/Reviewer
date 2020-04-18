@@ -86,9 +86,7 @@ echo "</div>"; //mainview div ends here
     </div><!--Right column div end--->    
 </div><!--Row div end--->
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+<?php include "../master/masterfooter.php"; ?> <!-- to add footer -->
 
 
 </body>
