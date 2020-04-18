@@ -222,7 +222,7 @@ class Database_api{
 			else if($value=="liked"){
 				$query = "DELETE from likes WHERE website_id='$website_id' AND user_id='$user_id'";
 			}
-			else if($value=="dislike"){
+			else if($value=="disliked"){
 				$query = "DELETE from dislikes WHERE website_id='$website_id' AND user_id='$user_id'";
 			}
 
